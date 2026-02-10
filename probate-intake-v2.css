@@ -1,0 +1,413 @@
+```css
+/* ==========================================================
+   Daniel S. Pickens Law — Professional Intake UI (Gavel/Docassemble)
+   File: probate-intake-v2.css
+   Notes:
+   - Dark, glassy, premium look
+   - High-contrast, accessible text
+   - Strong overrides for Docassemble/Gavel choice lists
+   ========================================================== */
+
+/* ---------- Design Tokens ---------- */
+:root{
+  --bg0:#070a13;
+  --bg1:#0b1220;
+  --bg2:#0e1830;
+
+  --card:#0f172a;
+  --cardSoft: rgba(255,255,255,.05);
+  --line: rgba(255,255,255,.12);
+
+  --text:#e9eef8;
+  --muted:#a8b3c7;
+  --faint: rgba(233,238,248,.70);
+
+  --brand1:#7c3aed; /* violet */
+  --brand2:#06b6d4; /* cyan */
+  --brand3:#22c55e; /* green */
+
+  --danger:#ef4444;
+  --warning:#f59e0b;
+
+  --shadow: 0 16px 48px rgba(0,0,0,.55);
+  --shadow2: 0 10px 26px rgba(0,0,0,.40);
+
+  --r16:16px;
+  --r22:22px;
+  --pill:999px;
+
+  --focusRing: 0 0 0 4px rgba(6,182,212,.22);
+  --focusRing2: 0 0 0 4px rgba(124,58,237,.22);
+
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+/* ---------- Page Backdrop ---------- */
+html, body{
+  font-family: var(--font) !important;
+  color: var(--text) !important;
+  background:
+    radial-gradient(1200px 800px at 10% 0%, rgba(124,58,237,.22), transparent 60%),
+    radial-gradient(1000px 800px at 90% 12%, rgba(6,182,212,.18), transparent 55%),
+    radial-gradient(900px 700px at 35% 85%, rgba(34,197,94,.10), transparent 60%),
+    linear-gradient(180deg, var(--bg0), var(--bg2)) !important;
+  min-height: 100%;
+}
+
+/* Prevent accidental invisible text from upstream styles */
+*{
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+body, p, span, div, label, legend, h1, h2, h3, h4{
+  color: var(--text) !important;
+}
+
+/* ---------- Layout Container (best-effort across builders) ---------- */
+form{
+  max-width: 980px;
+  margin: 28px auto !important;
+  padding: 22px !important;
+}
+
+/* ---------- “Card” Panels / Sections ---------- */
+fieldset,
+section,
+.form-section,
+.panel,
+.card,
+[class*="section"],
+[class*="Step"],
+[class*="step"],
+[class*="Panel"],
+[class*="panel"],
+.da-question,
+.da-fieldset,
+.da-field-container{
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--r22) !important;
+  box-shadow: var(--shadow2) !important;
+  padding: 18px 18px 14px !important;
+  margin: 14px 0 !important;
+  backdrop-filter: blur(10px);
+}
+
+/* ---------- Headings / Titles ---------- */
+h1, h2, h3, h4, legend{
+  letter-spacing: .2px;
+  color: var(--text) !important;
+}
+
+h1{
+  font-size: clamp(26px, 2.6vw, 36px) !important;
+  margin: 6px 0 12px !important;
+  line-height: 1.15;
+}
+
+h2, legend{
+  font-size: 18px !important;
+  margin: 4px 0 10px !important;
+  font-weight: 750 !important;
+}
+
+/* Softer supporting text */
+small,
+.help,
+.helptext,
+.helper,
+.description,
+[class*="help"],
+[class*="Help"],
+[class*="desc"],
+[class*="Desc"]{
+  color: var(--muted) !important;
+  line-height: 1.4;
+}
+
+/* ---------- Labels ---------- */
+label{
+  display:block;
+  font-weight: 750 !important;
+  color: var(--text) !important;
+  margin: 12px 0 6px !important;
+  font-size: 13.5px !important;
+}
+label .required,
+label [aria-hidden="true"]{
+  color: var(--warning) !important;
+}
+
+/* ---------- Inputs ---------- */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+input[type="search"],
+input[type="url"],
+input[type="password"],
+textarea,
+select,
+.form-control,
+.input{
+  width: 100% !important;
+  border-radius: 14px !important;
+  padding: 12px 12px !important;
+  min-height: 46px;
+  border: 1px solid rgba(255,255,255,.14) !important;
+
+  /* Make text ALWAYS visible */
+  color: var(--text) !important;
+
+  /* Dark input glass */
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 0 0 0 rgba(0,0,0,0) !important;
+
+  transition: transform .08s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+
+textarea{
+  min-height: 120px !important;
+  resize: vertical;
+}
+
+select{
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(233,238,248,.92) 50%),
+    linear-gradient(135deg, rgba(233,238,248,.92) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 2px),
+    calc(100% - 12px) calc(50% - 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 36px !important;
+}
+
+::placeholder{
+  color: rgba(168,179,199,.72) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.form-control:focus{
+  outline: none !important;
+  border-color: rgba(6,182,212,.60) !important;
+  box-shadow: var(--focusRing), inset 0 1px 0 rgba(255,255,255,.06) !important;
+  background: linear-gradient(180deg, rgba(6,182,212,.10), rgba(255,255,255,.035)) !important;
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"],
+.is-invalid{
+  border-color: rgba(239,68,68,.75) !important;
+  box-shadow: 0 0 0 4px rgba(239,68,68,.18) !important;
+}
+
+/* ---------- Buttons ---------- */
+button,
+input[type="submit"],
+input[type="button"],
+.btn{
+  border: 0 !important;
+  border-radius: var(--pill) !important;
+  padding: 12px 16px !important;
+  min-height: 46px;
+  font-weight: 800 !important;
+  letter-spacing: .2px;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+/* Primary */
+button[type="submit"],
+input[type="submit"],
+.btn-primary,
+[class*="primary"]{
+  background: linear-gradient(135deg, var(--brand1), var(--brand2)) !important;
+  color: #08101f !important;
+  box-shadow: 0 14px 35px rgba(124,58,237,.22), 0 10px 25px rgba(6,182,212,.16) !important;
+}
+
+button:hover,
+input[type="submit"]:hover,
+.btn:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+button:active,
+input[type="submit"]:active,
+.btn:active{
+  transform: translateY(0px);
+}
+
+/* Secondary */
+.btn-secondary,
+button.secondary,
+[class*="secondary"]{
+  background: rgba(255,255,255,.08) !important;
+  color: var(--text) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  box-shadow: var(--shadow2) !important;
+}
+
+/* Disabled */
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled{
+  opacity: .60 !important;
+  cursor: not-allowed !important;
+}
+
+/* ---------- Progress (best-effort) ---------- */
+progress,
+.progress,
+[class*="progress"],
+[class*="Progress"]{
+  width: 100% !important;
+  height: 10px !important;
+  border-radius: var(--pill) !important;
+  overflow: hidden;
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+}
+progress::-webkit-progress-bar{ background: rgba(255,255,255,.08); }
+progress::-webkit-progress-value{
+  background: linear-gradient(90deg, var(--brand1), var(--brand2));
+  border-radius: var(--pill);
+}
+progress::-moz-progress-bar{
+  background: linear-gradient(90deg, var(--brand1), var(--brand2));
+}
+
+/* ---------- Validation Messages ---------- */
+.error,
+.errors,
+.validation,
+.field-error,
+[class*="error"],
+[class*="Error"],
+[class*="validation"],
+[class*="Validation"]{
+  color: #fecaca !important;
+}
+.success,
+[class*="success"],
+[class*="Success"]{
+  color: #bbf7d0 !important;
+}
+
+/* ---------- Choice Lists (Docassemble/Gavel) ----------
+   This is the main fix for “white pill + invisible text”.
+*/
+
+/* Common wrappers */
+.list-group,
+.da-fieldset .list-group,
+.da-field-container .list-group{
+  background: transparent !important;
+  border: 0 !important;
+}
+
+/* Each choice row */
+.list-group-item,
+fieldset .list-group-item,
+.da-fieldset .list-group-item,
+.da-field-container .list-group-item,
+label.list-group-item{
+  background: rgba(255,255,255,.04) !important;
+  color: var(--text) !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  border-radius: 16px !important;
+  padding: 12px 14px !important;
+  margin: 10px 0 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+
+/* Make sure any nested text is readable */
+.list-group-item *,
+label.list-group-item *{
+  color: var(--text) !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Hover */
+.list-group-item:hover,
+label.list-group-item:hover{
+  background: rgba(6,182,212,.08) !important;
+  border-color: rgba(6,182,212,.35) !important;
+}
+
+/* Selected state (works on many DA builds) */
+.list-group-item.active,
+label.list-group-item.active,
+.list-group-item:has(input:checked),
+label.list-group-item:has(input:checked){
+  background: rgba(6,182,212,.14) !important;
+  border-color: rgba(6,182,212,.55) !important;
+  box-shadow: 0 0 0 4px rgba(6,182,212,.14) !important;
+}
+
+/* Radio / checkbox accent */
+input[type="checkbox"],
+input[type="radio"]{
+  accent-color: var(--brand2);
+  transform: translateY(1px);
+}
+
+/* Align the control + text nicely */
+.list-group-item input[type="radio"],
+.list-group-item input[type="checkbox"],
+label.list-group-item input[type="radio"],
+label.list-group-item input[type="checkbox"]{
+  margin-right: 12px !important;
+}
+
+/* ---------- If choices are rendered as btn groups ---------- */
+.btn-group .btn,
+.btn-group-vertical .btn{
+  background: rgba(255,255,255,.04) !important;
+  color: var(--text) !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  border-radius: 16px !important;
+  padding: 12px 14px !important;
+  margin: 8px 0 !important;
+}
+.btn-group .btn:hover,
+.btn-group-vertical .btn:hover{
+  background: rgba(6,182,212,.08) !important;
+  border-color: rgba(6,182,212,.35) !important;
+}
+.btn-group .btn.active,
+.btn-group-vertical .btn.active,
+.btn-group .btn:has(input:checked),
+.btn-group-vertical .btn:has(input:checked){
+  background: rgba(6,182,212,.14) !important;
+  border-color: rgba(6,182,212,.55) !important;
+  box-shadow: 0 0 0 4px rgba(6,182,212,.14) !important;
+}
+
+/* ---------- Optional polish ---------- */
+hr{
+  border: 0 !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent) !important;
+  margin: 14px 0 !important;
+}
+
+/* Slightly tighter on mobile */
+@media (max-width: 700px){
+  form{ padding: 14px !important; margin: 14px auto !important; }
+  fieldset, section, .panel, .card, .da-question, .da-fieldset, .da-field-container{ padding: 14px !important; }
+  h1{ margin-bottom: 10px !important; }
+}
+```
