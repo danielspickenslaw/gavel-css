@@ -440,3 +440,70 @@ body, #dabody, #daquestion, .container, .row, .tab-content, .tab-pane{
   border-color: rgba(6,182,212,.60) !important;
   box-shadow: 0 0 0 4px rgba(6,182,212,.14) !important;
 }
+/* ==========================================================
+   CHOICE PILL FIX (Docassemble variants)
+   Forces dark pills + visible text for radio/checkbox options
+   ========================================================== */
+
+/* Common containers */
+#dabody .dafield,
+#dabody .da-field,
+#dabody .da-fieldset,
+#dabody .da-radio,
+#dabody .da-checkbox{
+  color: var(--text) !important;
+}
+
+/* Target the actual clickable option rows (many builds use label wrappers) */
+#dabody label,
+#dabody .dafield label,
+#dabody .da-field label{
+  color: var(--text) !important;
+}
+
+/* If options are rendered as “button-like” labels or rows */
+#dabody label.btn,
+#dabody .btn.btn-default,
+#dabody .btn.btn-secondary,
+#dabody .btn-outline-secondary{
+  background: rgba(255,255,255,.06) !important;
+  color: var(--text) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  border-radius: 16px !important;
+}
+
+/* If options are rendered as list group but forced white elsewhere */
+#dabody .list-group-item,
+#dabody label.list-group-item,
+#dabody .list-group-item-action{
+  background: rgba(255,255,255,.06) !important;
+  color: var(--text) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+}
+
+/* Hard override: anything inside the option row must be visible */
+#dabody .list-group-item *,
+#dabody label.list-group-item *,
+#dabody label.btn *,
+#dabody .btn.btn-default *,
+#dabody .btn.btn-secondary *{
+  color: var(--text) !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Checked/selected state */
+#dabody label.btn.active,
+#dabody .btn.active,
+#dabody .list-group-item.active,
+#dabody label:has(input:checked){
+  background: rgba(6,182,212,.16) !important;
+  border-color: rgba(6,182,212,.60) !important;
+  box-shadow: 0 0 0 4px rgba(6,182,212,.14) !important;
+}
+
+/* Radio/checkbox circle visibility on dark pills */
+#dabody input[type="radio"],
+#dabody input[type="checkbox"]{
+  accent-color: var(--brand2) !important;
+}
