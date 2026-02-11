@@ -460,3 +460,7 @@ body{
     radial-gradient(1100px 900px at 85% 10%, rgba(6,182,212,.18), transparent 55%),
     linear-gradient(180deg, #0b1220, #111b33) !important;
 }
+/* kill any global white background */
+#dabody, #dabody .container, #dabody .row, #dabody .tab-content, #dabody .tab-pane{
+  background: transparent !important;
+}
