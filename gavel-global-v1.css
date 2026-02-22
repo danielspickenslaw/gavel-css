@@ -1,0 +1,120 @@
+/* ==========================================================
+   GAVEL GLOBAL — Answer Visibility + Dark Theme Compatibility
+   Purpose: prevent “invisible answers” across ALL questionnaires
+   Scope: Docassemble/Gavel runner (#dabody)
+   ========================================================== */
+
+:root{
+  --gavel-text: #e6eaf2;
+  --gavel-pill-bg: rgba(255,255,255,.06);
+  --gavel-pill-border: rgba(255,255,255,.14);
+  --gavel-selected-bg: rgba(6,182,212,.16);
+  --gavel-selected-border: rgba(6,182,212,.60);
+}
+
+/* 1) Force readable text everywhere inside the runner */
+#dabody, #dabody *{
+  color: var(--gavel-text) !important;
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+/* 2) Fix inputs (typed text + placeholders) */
+#dabody input[type="text"],
+#dabody input[type="email"],
+#dabody input[type="tel"],
+#dabody input[type="number"],
+#dabody input[type="password"],
+#dabody input[type="search"],
+#dabody input[type="url"],
+#dabody textarea,
+#dabody select{
+  background: rgba(255,255,255,.06) !important;
+  color: var(--gavel-text) !important;
+  border: 1px solid var(--gavel-pill-border) !important;
+}
+
+#dabody input::placeholder,
+#dabody textarea::placeholder{
+  color: rgba(230,234,242,.70) !important;
+}
+
+/* 3) Common choice renderers (covers most questionnaire types) */
+
+/* A) Docassemble “inputtype” containers (radio/checkbox/yesno/etc.) */
+#dabody [class*="da-field-container-inputtype-"] label{
+  display: block !important;
+  background: var(--gavel-pill-bg) !important;
+  border: 1px solid var(--gavel-pill-border) !important;
+  border-radius: 16px !important;
+  padding: 12px 14px !important;
+  margin: 10px 0 !important;
+}
+
+#dabody [class*="da-field-container-inputtype-"] label:hover{
+  background: rgba(6,182,212,.10) !important;
+  border-color: rgba(6,182,212,.40) !important;
+}
+
+#dabody [class*="da-field-container-inputtype-"] label:has(input:checked){
+  background: var(--gavel-selected-bg) !important;
+  border-color: var(--gavel-selected-border) !important;
+  box-shadow: 0 0 0 4px rgba(6,182,212,.14) !important;
+}
+
+/* B) Bootstrap list-group choices */
+#dabody .list-group-item,
+#dabody label.list-group-item,
+#dabody .list-group-item-action{
+  background: var(--gavel-pill-bg) !important;
+  border: 1px solid var(--gavel-pill-border) !important;
+  border-radius: 16px !important;
+  padding: 12px 14px !important;
+  margin: 10px 0 !important;
+}
+
+#dabody .list-group-item:has(input:checked),
+#dabody label.list-group-item:has(input:checked),
+#dabody .list-group-item.active{
+  background: var(--gavel-selected-bg) !important;
+  border-color: var(--gavel-selected-border) !important;
+  box-shadow: 0 0 0 4px rgba(6,182,212,.14) !important;
+}
+
+/* C) Bootstrap form-check choices */
+#dabody .form-check{
+  background: var(--gavel-pill-bg) !important;
+  border: 1px solid var(--gavel-pill-border) !important;
+  border-radius: 16px !important;
+  padding: 12px 14px !important;
+  margin: 10px 0 !important;
+}
+
+#dabody .form-check:has(input:checked){
+  background: var(--gavel-selected-bg) !important;
+  border-color: var(--gavel-selected-border) !important;
+  box-shadow: 0 0 0 4px rgba(6,182,212,.14) !important;
+}
+
+/* D) Button-style choices */
+#dabody .btn,
+#dabody label.btn{
+  background: var(--gavel-pill-bg) !important;
+  border: 1px solid var(--gavel-pill-border) !important;
+  border-radius: 16px !important;
+}
+
+#dabody .btn.active,
+#dabody label.btn.active,
+#dabody label.btn:has(input:checked){
+  background: var(--gavel-selected-bg) !important;
+  border-color: var(--gavel-selected-border) !important;
+  box-shadow: 0 0 0 4px rgba(6,182,212,.14) !important;
+}
+
+/* 4) Ensure toggles are visible */
+#dabody input[type="radio"],
+#dabody input[type="checkbox"]{
+  accent-color: #06b6d4 !important;
+}
