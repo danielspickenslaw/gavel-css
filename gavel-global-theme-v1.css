@@ -1,0 +1,390 @@
+/* ==========================================================
+   GAVEL GLOBAL THEME (v1)
+   Purpose:
+   - Apply the “Probate-style” dark/glass look to ALL questionnaires
+   - Ensure answer choices and text are always visible
+   - Win even when docassemble_global.css loads AFTER your custom CSS
+
+   Recommended filename in GitHub:
+   gavel-global-theme-v1.css
+   ========================================================== */
+
+/* ---------- Design Tokens ---------- */
+:root{
+  --bg1:#0b1220;
+  --bg2:#111b33;
+
+  --text:#e6eaf2;
+  --muted:#a7b0c2;
+
+  --line:rgba(255,255,255,.10);
+  --border:rgba(255,255,255,.14);
+
+  --glassA: rgba(255,255,255,.06);
+  --glassB: rgba(255,255,255,.03);
+
+  --brand1:#7c3aed;
+  --brand2:#06b6d4;
+
+  --focusRing: 0 0 0 4px rgba(6,182,212,.22);
+  --shadow: 0 10px 25px rgba(0,0,0,.35);
+  --shadow2: 0 16px 44px rgba(0,0,0,.45);
+
+  --r12:12px;
+  --r16:16px;
+  --r22:22px;
+  --pill:999px;
+
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+/* ==========================================================
+   HARD OVERRIDES (must beat docassemble_global.css)
+   ========================================================== */
+
+/* Force dark background at high specificity */
+html body.dabody{
+  font-family: var(--font) !important;
+  color: var(--text) !important;
+  background:
+    radial-gradient(1200px 900px at 15% 0%, rgba(124,58,237,.22), transparent 60%),
+    radial-gradient(1100px 900px at 85% 10%, rgba(6,182,212,.18), transparent 55%),
+    linear-gradient(180deg, var(--bg1), var(--bg2)) !important;
+  background-color: var(--bg1) !important;
+}
+
+/* Docassemble body container */
+html body.dabody #dabody{
+  background:
+    radial-gradient(1200px 900px at 15% 0%, rgba(124,58,237,.22), transparent 60%),
+    radial-gradient(1100px 900px at 85% 10%, rgba(6,182,212,.18), transparent 55%),
+    linear-gradient(180deg, var(--bg1), var(--bg2)) !important;
+  background-color: var(--bg1) !important;
+  min-height: 100vh !important;
+  padding: 18px 0 !important;
+}
+
+/* Remove white backgrounds Docassemble often applies to wrappers */
+html body.dabody #dabody .container,
+html body.dabody #dabody .row,
+html body.dabody #dabody .tab-content,
+html body.dabody #dabody .tab-pane,
+html body.dabody #dabody .da-page-header,
+html body.dabody #dabody .daformfields,
+html body.dabody #dabody .da-form-group{
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Always-visible text (prevents “faded / invisible answers”) */
+html body.dabody #dabody,
+html body.dabody #dabody *{
+  color: var(--text) !important;
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: none !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ==========================================================
+   LAYOUT / CARDS
+   ========================================================== */
+
+/* Keep forms readable width */
+html body.dabody #dabody form{
+  max-width: 980px !important;
+  margin: 28px auto !important;
+  padding: 22px !important;
+}
+
+/* Card feel for common sections / question blocks */
+html body.dabody #dabody .da-field-container,
+html body.dabody #dabody .da-form-group.da-field-container,
+html body.dabody #dabody fieldset,
+html body.dabody #dabody section,
+html body.dabody #dabody .panel,
+html body.dabody #dabody .card,
+html body.dabody #dabody .da-question,
+html body.dabody #dabody .da-fieldset,
+html body.dabody #dabody .da-field-container{
+  background: linear-gradient(180deg, var(--glassA), var(--glassB)) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--r22) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+/* Add spacing between blocks */
+html body.dabody #dabody .da-field-container,
+html body.dabody #dabody .da-form-group.da-field-container{
+  padding: 18px 18px 14px !important;
+  margin: 14px 0 !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Headings */
+html body.dabody #dabody h1,
+html body.dabody #dabody h2,
+html body.dabody #dabody h3,
+html body.dabody #dabody h4,
+html body.dabody #dabody legend{
+  color: var(--text) !important;
+  letter-spacing: .2px !important;
+}
+
+html body.dabody #dabody h1{
+  font-size: clamp(26px, 2.6vw, 34px) !important;
+  margin: 6px 0 12px !important;
+  line-height: 1.15 !important;
+}
+
+html body.dabody #dabody h2,
+html body.dabody #dabody legend{
+  font-size: 18px !important;
+  margin: 4px 0 10px !important;
+  font-weight: 750 !important;
+}
+
+/* Help/description text */
+html body.dabody #dabody small,
+html body.dabody #dabody .help,
+html body.dabody #dabody .helptext,
+html body.dabody #dabody .helper,
+html body.dabody #dabody .description{
+  color: var(--muted) !important;
+  line-height: 1.4 !important;
+}
+
+/* Labels */
+html body.dabody #dabody label{
+  display: block !important;
+  font-weight: 650 !important;
+  margin: 12px 0 6px !important;
+  font-size: 13.5px !important;
+}
+
+/* ==========================================================
+   INPUTS
+   ========================================================== */
+
+html body.dabody #dabody input[type="text"],
+html body.dabody #dabody input[type="email"],
+html body.dabody #dabody input[type="tel"],
+html body.dabody #dabody input[type="number"],
+html body.dabody #dabody input[type="date"],
+html body.dabody #dabody input[type="time"],
+html body.dabody #dabody input[type="search"],
+html body.dabody #dabody input[type="url"],
+html body.dabody #dabody input[type="password"],
+html body.dabody #dabody textarea,
+html body.dabody #dabody select{
+  width: 100% !important;
+  min-height: 46px !important;
+  padding: 12px 12px !important;
+  border-radius: var(--r12) !important;
+  border: 1px solid var(--border) !important;
+  background: rgba(255,255,255,.06) !important;
+  color: var(--text) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+
+html body.dabody #dabody textarea{
+  min-height: 120px !important;
+  resize: vertical !important;
+}
+
+html body.dabody #dabody input::placeholder,
+html body.dabody #dabody textarea::placeholder{
+  color: rgba(230,234,242,.70) !important;
+}
+
+html body.dabody #dabody input:focus,
+html body.dabody #dabody textarea:focus,
+html body.dabody #dabody select:focus{
+  outline: none !important;
+  border-color: rgba(6,182,212,.60) !important;
+  box-shadow: var(--focusRing) !important;
+  background: rgba(6,182,212,.10) !important;
+}
+
+/* ==========================================================
+   CHOICES (RADIO / CHECKBOX / YES-NO / MULTISELECT)
+   Works across different renderers used by different questionnaires
+   ========================================================== */
+
+/* Ensure toggles are visible/on-brand */
+html body.dabody #dabody input[type="radio"],
+html body.dabody #dabody input[type="checkbox"]{
+  accent-color: var(--brand2) !important;
+}
+
+/* A) Docassemble “inputtype” containers (covers many question types) */
+html body.dabody #dabody [class*="da-field-container-inputtype-"] label{
+  display: block !important;
+  background: rgba(255,255,255,.06) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r16) !important;
+  padding: 12px 14px !important;
+  margin: 10px 0 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+
+html body.dabody #dabody [class*="da-field-container-inputtype-"] label:hover{
+  background: rgba(6,182,212,.10) !important;
+  border-color: rgba(6,182,212,.40) !important;
+}
+
+html body.dabody #dabody [class*="da-field-container-inputtype-"] label:has(input:checked){
+  background: rgba(6,182,212,.16) !important;
+  border-color: rgba(6,182,212,.60) !important;
+  box-shadow: 0 0 0 4px rgba(6,182,212,.14) !important;
+}
+
+/* B) Bootstrap list-group choices */
+html body.dabody #dabody .list-group-item,
+html body.dabody #dabody label.list-group-item,
+html body.dabody #dabody .list-group-item-action{
+  background: rgba(255,255,255,.06) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r16) !important;
+  padding: 12px 14px !important;
+  margin: 10px 0 !important;
+}
+
+html body.dabody #dabody .list-group-item:has(input:checked),
+html body.dabody #dabody label.list-group-item:has(input:checked),
+html body.dabody #dabody .list-group-item.active{
+  background: rgba(6,182,212,.16) !important;
+  border-color: rgba(6,182,212,.60) !important;
+  box-shadow: 0 0 0 4px rgba(6,182,212,.14) !important;
+}
+
+/* C) Bootstrap form-check choices */
+html body.dabody #dabody .form-check{
+  background: rgba(255,255,255,.06) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r16) !important;
+  padding: 12px 14px !important;
+  margin: 10px 0 !important;
+}
+
+html body.dabody #dabody .form-check:hover{
+  background: rgba(6,182,212,.10) !important;
+  border-color: rgba(6,182,212,.40) !important;
+}
+
+html body.dabody #dabody .form-check:has(input:checked){
+  background: rgba(6,182,212,.16) !important;
+  border-color: rgba(6,182,212,.60) !important;
+  box-shadow: 0 0 0 4px rgba(6,182,212,.14) !important;
+}
+
+/* D) Button-style choices */
+html body.dabody #dabody .btn,
+html body.dabody #dabody label.btn{
+  background: rgba(255,255,255,.06) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r16) !important;
+}
+
+html body.dabody #dabody .btn.active,
+html body.dabody #dabody label.btn.active,
+html body.dabody #dabody label.btn:has(input:checked){
+  background: rgba(6,182,212,.16) !important;
+  border-color: rgba(6,182,212,.60) !important;
+  box-shadow: 0 0 0 4px rgba(6,182,212,.14) !important;
+}
+
+/* ==========================================================
+   NAV / STEPPER (works for section sidebars and progress lists)
+   Best-effort selectors to make Eviction-style left menu match theme
+   ========================================================== */
+
+/* Top nav bar */
+html body.dabody #hs1Nav,
+html body.dabody #hs1NavContainer{
+  background: transparent !important;
+}
+
+/* Generic sidebar containers (if present) */
+html body.dabody #dabody .sidebar,
+html body.dabody #dabody .da-sidebar,
+html body.dabody #dabody .da-interview-sidebar,
+html body.dabody #dabody [class*="sidebar"]{
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--r22) !important;
+  box-shadow: var(--shadow) !important;
+  padding: 12px !important;
+}
+
+/* Left-step list items (covers many nav list patterns) */
+html body.dabody #dabody .sidebar a,
+html body.dabody #dabody .da-sidebar a,
+html body.dabody #dabody [class*="sidebar"] a,
+html body.dabody #dabody .nav a,
+html body.dabody #dabody .list-group a{
+  color: var(--text) !important;
+  text-decoration: none !important;
+}
+
+html body.dabody #dabody .sidebar a:hover,
+html body.dabody #dabody .da-sidebar a:hover,
+html body.dabody #dabody [class*="sidebar"] a:hover{
+  color: var(--text) !important;
+  opacity: 1 !important;
+}
+
+/* Active/current items */
+html body.dabody #dabody .active,
+html body.dabody #dabody .current,
+html body.dabody #dabody .nav-link.active,
+html body.dabody #dabody .list-group-item.active{
+  background: rgba(6,182,212,.16) !important;
+  border-color: rgba(6,182,212,.60) !important;
+  box-shadow: 0 0 0 4px rgba(6,182,212,.12) !important;
+}
+
+/* ==========================================================
+   BUTTONS
+   ========================================================== */
+
+html body.dabody #dabody button,
+html body.dabody #dabody input[type="submit"],
+html body.dabody #dabody input[type="button"]{
+  border-radius: var(--pill) !important;
+  font-weight: 750 !important;
+  letter-spacing: .2px !important;
+}
+
+html body.dabody #dabody button[type="submit"],
+html body.dabody #dabody input[type="submit"],
+html body.dabody #dabody .btn-primary{
+  background: linear-gradient(135deg, var(--brand1), var(--brand2)) !important;
+  color: #08101f !important;
+  border: 0 !important;
+  box-shadow: 0 14px 35px rgba(124,58,237,.24), 0 10px 25px rgba(6,182,212,.18) !important;
+}
+
+/* ==========================================================
+   MISC
+   ========================================================== */
+
+html body.dabody #dabody hr{
+  border: 0 !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent) !important;
+  margin: 14px 0 !important;
+}
+
+/* Mobile */
+@media (max-width: 700px){
+  html body.dabody #dabody form{
+    padding: 14px !important;
+    margin: 14px auto !important;
+  }
+  html body.dabody #dabody .da-field-container,
+  html body.dabody #dabody .da-form-group.da-field-container{
+    padding: 14px !important;
+  }
+}
